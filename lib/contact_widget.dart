@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_contact/add_contact_widget.dart';
 import 'package:my_contact/contact.dart';
+import 'package:my_contact/edit_contact_widget%20copy.dart';
 
 class ContactWidget extends StatefulWidget {
   const ContactWidget({Key? key}) : super(key: key);
@@ -52,8 +53,8 @@ class _ContactWidgetState extends State<ContactWidget> {
         title: Text("My Cotact"),
       ),
       body: ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
+          itemBuilder: (context, index) {
+            return ListTile(
               leading: CircleAvatar(
                 child: Text(contacts[index].name[0]),
               ),
@@ -64,10 +65,41 @@ class _ContactWidgetState extends State<ContactWidget> {
                   Text(contacts[index].phone),
                   Text(contacts[index].email)
                 ],
-              ));
-        },
-        itemCount: contacts.length,
-      ),
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditContactWidget(
+                          contact: contacts[index],
+                          editContact: (contact) {
+                            setState(() {
+                              contacts[index] = contact;
+                            });
+                          },
+                        ),
+                      ));
+                },
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditContactWidget(
+                        contact: contacts[index],
+                        editContact: (contact) {
+                          setState(() {
+                            contacts[index] = contact;
+                          });
+                        },
+                      ),
+                    ));
+              },
+            );
+          },
+          itemCount: contacts.length),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
