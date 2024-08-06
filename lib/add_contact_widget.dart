@@ -2,9 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:my_contact/contact.dart';
 
 class AddContactWidget extends StatefulWidget {
-  const AddContactWidget({Key? key}) : super(key: key);
+  final Function(Contact contact) addContact;
+  const AddContactWidget({Key? key, required this.addContact})
+      : super(key: key);
 
   @override
   _AddContactWidgetState createState() => _AddContactWidgetState();
@@ -91,6 +94,12 @@ class _AddContactWidgetState extends State<AddContactWidget> {
             ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    Navigator.pop(context);
+                    widget.addContact(Contact(
+                        id: -1,
+                        name: nameController.text,
+                        phone: phoneController.text,
+                        email: emailController.text));
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(content: Text('Process Data')));
                   }

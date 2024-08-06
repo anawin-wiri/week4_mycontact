@@ -1,8 +1,8 @@
 class Contact {
-  final int id;
-  final String name;
-  final String phone;
-  final String email;
+  int id;
+  String name;
+  String phone;
+  String email;
 
   Contact(
       {required this.id,
