@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:my_contact/add_contact_widget.dart';
+import 'package:my_contact/contact_provider.dart';
 import 'package:my_contact/contact_widget.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (context) => ContactProvider())],
+    child: MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {
